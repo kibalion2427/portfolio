@@ -1,0 +1,85 @@
+import React, { Component } from "react";
+import { Link, animateScroll as scroll } from "react-scroll";
+import logo from "../../images/logo.svg";
+
+class Nvbar extends Component {
+  state = {
+    navBarOpen: false,
+    css: "collapse navbar-collapse",
+    links: [
+      { id: 1, path: "/", text: "home" },
+      { id: 2, path: "/", text: "" }
+    ]
+  };
+
+  //   navBarHandler =
+  render() {
+    return (
+      <nav className="custom-nav" id="navbar">
+        <div className="nav-content">
+          <div className="wrap-logo">
+            <img src={logo} className="nav-logo" alt="logo" />
+          </div>
+          <div className="wrap-list">
+            <ul className="nav-list">
+              <li className="nav-item">
+                <Link
+                  className="link"
+                  activeClass="active"
+                  to="about"
+                  spy={true}
+                  smooth={true}
+                  offset={-120}
+                  duration={500}
+                >
+                  About
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="link"
+                  activeClass="active"
+                  to="works"
+                  spy={true}
+                  smooth={true}
+                  offset={-120}
+                  duration={500}
+                >
+                  Experience
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="link"
+                  activeClass="active"
+                  to="projects"
+                  spy={true}
+                  smooth={true}
+                  offset={-120}
+                  duration={500}
+                >
+                  Projects
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="link"
+                  activeClass="active"
+                  to="contact"
+                  spy={true}
+                  smooth={true}
+                  offset={-120}
+                  duration={500}
+                >
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    );
+  }
+}
+
+export default Nvbar;
