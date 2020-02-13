@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../images/logo.svg";
+import logo from "../../images/azure.svg";
 import "../app/app.css";
 import Navbar from "../globals/navbar";
 import About from "../about/about";
