@@ -11,6 +11,12 @@
   z-index: 1000;
 } */
 
+nav {
+  -webkit-box-shadow: 0px 3px 13px -2px rgba(102, 99, 102, 0.81);
+  -moz-box-shadow: 0px 3px 13px -2px rgba(102, 99, 102, 0.81);
+  box-shadow: 0px 3px 13px -2px rgba(102, 99, 102, 0.81);
+}
+
 .nav-logo {
   height: 60px;
   width: 60px;
@@ -36,10 +42,15 @@
 /* SECTIONS */
 
 .about-section {
-  height: 100vh;
+  /* height: 100vh; */
   background-color: aqua;
   margin: 0 auto;
-  padding: 40px;
+  padding: 100px 0px;
+  /* display: flex; */
+  min-height: 100vh;
+  max-width: 1000px;
+  justify-content: center;
+  position: relative;
 }
 
 .work-section {
@@ -47,6 +58,7 @@
   background-color: #fff;
   margin: 0 auto;
   padding: 40px;
+  display: block;
 }
 
 .projects-section {
@@ -54,10 +66,63 @@
   background-color: aqua;
   margin: 0 auto;
   padding: 40px;
+  display: block;
 }
 .contact-section {
   height: 100vh;
   background-color: #fff;
   margin: 0 auto;
   padding: 40px;
+  display: block;
+}
+
+/* ABOUT */
+.content-about {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.about-text {
+  width: 70%;
+  max-width: 600px;
+}
+
+.about-img {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  max-width: 250px;
+  max-height: 250px;
+  border-radius: 50%;
+  border: 1px solid white;
+  background-size: cover;
+  margin-right: 50px;
+  background: url("http://www.prelovac.com/vladimir/wp-content/uploads/2008/03/example.jpg")
+    no-repeat center center;
+}
+.about-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(140px, 200px));
+  overflow: hidden;
+  margin: 20px 0px 0px;
+  list-style: none;
+}
+
+.about-list li {
+  position: relative;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono",
+    "Lucida Console", Monaco, monospace;
+  font-size: 13px;
+  color: rgb(136, 146, 176);
+  /* list-style-type: square; */
+}
+.about-list li::before {
+  content: "▹";
+  position: absolute;
+  left: 0px;
+  color: black;
+  font-size: 14px;
+  line-height: 12px;
 }
