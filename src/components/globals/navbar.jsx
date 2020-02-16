@@ -78,7 +78,7 @@ class Navbar extends Component {
                     to={section.name}
                     spy={true}
                     smooth={true}
-                    offset={-120}
+                    offset={-90}
                     duration={500}
                     onClick={this.navItemHandler}
                   >

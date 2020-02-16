@@ -1,0 +1,22 @@
+.title {
+  /* font-size: 1vw; */
+  font-size: 80px;
+  text-transform: capitalize;
+  margin: 0px;
+  font-weight: 600;
+  font-family: Calibre, "San Francisco", "SF Pro Text", -apple-system, system-ui,
+    BlinkMacSystemFont, Roboto, "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+
+  color: black;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+}
+@media (max-width: 48em) {
+  .title {
+    font-size: 50px;
+  }
+}

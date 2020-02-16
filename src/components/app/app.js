@@ -6,16 +6,20 @@ import About from "../about/about";
 import Projects from "../projects/project";
 import Contact from "../contact/contact";
 import Work from "../works/work";
-function App() {
+const App = () => {
   return (
-    <div className="App">
+    <div className="layout">
       <Navbar />
-      <About />
-      <Work />
-      <Projects />
-      <Contact />
+      <div className="content">
+        <div className="main-container">
+          <About />
+          <Work />
+          <Projects />
+          <Contact />
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
