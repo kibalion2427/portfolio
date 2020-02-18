@@ -9,7 +9,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: "body" // donde insertaremos nuestro script
 });
 const config = {
-  entry: "./src/index.js", // archivo js que codearemos
+  entry: ["babel-polyfill", "./src/index.js"], // archivo js que codearemos
   output: {
     path: path.resolve("./public"), //resolver el path de salida
     filename: "bundle.js" // archivo js compilado
