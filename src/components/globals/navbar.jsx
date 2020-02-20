@@ -1,10 +1,35 @@
 import React, { Component } from "react";
 import { Link, animateScroll as scroll } from "react-scroll";
-import logo from "../../images/azure.svg";
+import logo from "../../images/logo.svg";
 import { FaRegUser, FaProjectDiagram } from "react-icons/fa";
 import { IoIosRocket } from "react-icons/io";
 import { MdContactPhone } from "react-icons/md";
 import { GiDoctorFace } from "react-icons/gi";
+import { IconLogo } from "@components/icons";
+import styled from "styled-components";
+import { theme, mixins, media } from "@styles";
+const { colors, fontSizes, fonts } = theme;
+
+const StyledLogo = styled.div`
+  ${mixins.flexCenter};
+  a {
+    display: block;
+    color: ${colors.blue};
+    width: 42px;
+    height: 42px;
+    &:hover,
+    &:focus {
+      svg {
+        fill: ${colors.blue};
+      }
+    }
+    svg {
+      fill: none;
+      transition: ${theme.transition};
+      user-select: none;
+    }
+  }
+`;
 
 class Navbar extends Component {
   state = {
@@ -48,14 +73,11 @@ class Navbar extends Component {
     return (
       <nav className="navbar sticky-top navbar-expand-sm navbar-light bg-light">
         {/* logo */}
-        <a className="navbar-brand" href="#">
-          <img
-            src={logo}
-            className="nav-logo"
-            alt="logo"
-            onClick={this.scrolltoTopHandler}
-          ></img>
-        </a>
+        <StyledLogo tabindex="-1">
+          <a href="/" aria-label="home">
+            <IconLogo onClick={this.scrolltoTopHandler} />
+          </a>
+        </StyledLogo>
         {/* toggler button */}
         <button
           className="navbar-toggler"

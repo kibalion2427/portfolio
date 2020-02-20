@@ -8,22 +8,20 @@ import Contact from "../contact/contact";
 import Work from "../works/work";
 import Presentation from "../presentation/presentation";
 import aboutData from "../../data/aboutData.js";
-
+import { GlobalStyle, theme } from "@styles";
 const App = () => {
   const [adata, setAData] = useState(aboutData);
-  console.log("app1", adata);
   useEffect(() => {
     setAData(aboutData);
-    console.log("app", adata);
   });
 
   return (
     <div className="layout">
+      <GlobalStyle />
       <Navbar />
       <div className="content">
         <Presentation />
         <div className="main-container">
-          <About data={aboutData} />
           <About data={aboutData} />
           {/* <Work /> */}
           <Projects />

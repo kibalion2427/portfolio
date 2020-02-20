@@ -1,5 +1,5 @@
 .parent {
-  background-color: white;
+  background-color: rgb(44, 186, 204);
   min-height: 100%;
   width: 100%;
   height: 500px;
@@ -21,7 +21,7 @@
     0 0
   ); /*top,right,,left*/
 
-  background: rgb(44, 186, 204);
+  background: #0a192f; /* rgb(44, 186, 204); */
   width: 100%;
   height: 500px;
   justify-content: center;
@@ -31,7 +31,7 @@
 
 .presentation-content {
   text-transform: capitalize;
-  background-color: rgb(44, 186, 204);
+  background-color: #0a192f; /*rgb(44, 186, 204);*/
   width: 80%;
   text-align: center;
   /* margin: 0 auto 80px; */

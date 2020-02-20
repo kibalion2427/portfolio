@@ -10,14 +10,13 @@ import me from "../../data/me.jpg";
 // CSS STYLES
 const StyledContainer = styled(Section)`
   position: relative;
-  background-color: white;
+  background-color: #0a192f;
 `;
 
 const StyledFlexContainer = styled.div`
-  ${mixins.flexBetwwen};
+  ${mixins.flexBetween};
   align-items: flex-start;
-  ${media.tablet`display:block;`}
-  display:flex;
+  ${media.tablet`display: block;`};
 `;
 const StyledContent = styled.div`
   width: 60%;
@@ -67,6 +66,7 @@ const StyledPic = styled.div`
   position: relative;
   width: 40%;
   margin-left: 60px;
+
   max-width: 300px;
   ${media.tablet`margin:60px auto 0;`};
   ${media.phablet`width:70%;`};

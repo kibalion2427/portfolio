@@ -13,6 +13,7 @@ const config = {
   output: {
     path: path.resolve("./public"), //resolver el path de salida
     filename: "bundle.js" // archivo js compilado
+    // publicPath: "/public/"
   },
   module: {
     rules: [
@@ -58,13 +59,18 @@ const config = {
         ]
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|svg|ttf|woff(2)?|ico)$/i,
+        exclude: /node_modules/,
         use: [
           {
-            loader: "file-loader"
+            loader: "file-loader",
+            options: {
+              outputPath: "assets"
+            }
           }
         ]
       }
+      // { test: /\.(png|jpg)$/, loader: "url-loader?limit=8192" }
     ]
   },
   resolve: {
@@ -72,9 +78,18 @@ const config = {
     alias: {
       "@config": path.resolve(__dirname, "src/config"),
       "@styles": path.resolve(__dirname, "src/styles"),
-      "@utils": path.resolve(__dirname, "src/utils")
+      "@utils": path.resolve(__dirname, "src/utils"),
+      "@fonts": path.resolve(__dirname, "src/fonts"),
+      "@components": path.resolve(__dirname, "src/components")
     }
   },
-  plugins: [HtmlWebpackPluginConfig] // configuración de nuestra vista
+  plugins: [
+    HtmlWebpackPluginConfig
+    // new HtmlWebpackPlugin({
+    //   template: "./public/index.html",
+    //   filename: "./index.html",
+    //   favicon: "./public/favicon.ico"
+    // })
+  ] // configuración de nuestra vista
 };
 module.exports = config; //exportamos a webpack nuestra configuración
