@@ -59,6 +59,7 @@ nav {
   -webkit-box-pack: center;
   justify-content: center;
   -webkit-box-align: center;
+  overflow: hidden;
 }
 
 .projects-section {
@@ -74,6 +75,7 @@ nav {
   -webkit-box-pack: center;
   justify-content: center;
   -webkit-box-align: center;
+  overflow: hidden;
 }
 .contact-section {
   /* height: 100vh; */
@@ -88,6 +90,7 @@ nav {
   -webkit-box-pack: center;
   justify-content: center;
   -webkit-box-align: center;
+  overflow: hidden;
 }
 
 @media (max-width: 48em) {

@@ -39,7 +39,10 @@ const Work = () => {
           {console.log("h", h)}
           {console.log("numbers", numbers)}
           {h.about.skills.map((item, index) => (
-            <li key={index}>{item}</li>
+            <li key={index}>
+              {item}
+              {item}
+            </li>
           ))}
         </ul>
       </div>
