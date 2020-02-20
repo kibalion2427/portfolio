@@ -1,5 +1,5 @@
 .parent {
-  background-color: aqua;
+  background-color: white;
   min-height: 100%;
   width: 100%;
   height: 500px;
@@ -31,7 +31,7 @@
 
 .presentation-content {
   text-transform: capitalize;
-  background-color: brown;
+  background-color: rgb(44, 186, 204);
   width: 80%;
   text-align: center;
   /* margin: 0 auto 80px; */
@@ -57,7 +57,7 @@
   content: "";
   position: absolute;
   left: 50%;
-  bottom: -20px;
+  bottom: 250px;
   width: 140px;
   height: 2px;
   margin-left: -70px;

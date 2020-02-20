@@ -56,6 +56,14 @@ const config = {
             loader: "sass-loader" // compiles Sass to CSS
           }
         ]
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: "file-loader"
+          }
+        ]
       }
     ]
   },
@@ -63,6 +71,7 @@ const config = {
     extensions: [".js", ".jsx"],
     alias: {
       "@config": path.resolve(__dirname, "src/config"),
+      "@styles": path.resolve(__dirname, "src/styles"),
       "@utils": path.resolve(__dirname, "src/utils")
     }
   },

@@ -1,15 +1,17 @@
 .about-section {
-  background-color: aqua;
-  padding: 100px 0px;
-  display: flex;
-  min-height: 100vh;
+  background-color: white;
+  /* padding: 100px 0px; */
+  display: block;
+  /* min-height: 100vh; */
   max-width: 1000px;
   position: relative;
-  flex-direction: column;
-  /* align-items: flex-start; */
-  -webkit-box-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
+
+  padding: 150px 0px;
+  visibility: visible;
+  opacity: 1;
+  transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  transition: opacity 0.5s cubic-bezier(0.645, 0.045, 0.355, 1) 0.2s,
+    transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1) 0.2s;
 }
 .content-about {
   display: flex;
@@ -17,23 +19,96 @@
   align-items: flex-start;
 }
 .about-text {
-  /* width: 70%; */
-  /* max-width: 600px; */
+  width: 60%;
+  max-width: 480px;
+  white-space: pre-line;
 }
 
 .about-img {
   position: relative;
-  width: 250px;
-  height: 250px;
-  max-width: 250px;
-  max-height: 250px;
-  border-radius: 50%;
-  border: 1px solid white;
-  background-size: cover;
+  width: 40%;
+  max-width: 300px;
+  margin-left: 60px;
+  /* width: 250px; */
+  /* height: 250px; */
+  /* background-color: white; */
+  /* max-width: 250px; */
+  /* max-height: 250px; */
+  /* border-radius: 50%; */
+  /* border: 1px solid white; */
+  /* background-size: cover; */
   margin-right: 50px;
-  background: url("http://www.prelovac.com/vladimir/wp-content/uploads/2008/03/example.jpg")
-    no-repeat center center;
+  /* background: url("http://www.prelovac.com/vladimir/wp-content/uploads/2008/03/example.jpg") */
+  /* no-repeat center center; */
 }
+a {
+  display: inline-block;
+  text-decoration-skip-ink: auto;
+  color: inherit;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+}
+
+.ref-img {
+  box-shadow: rgba(2, 12, 27, 0.7) 0px 10px 30px -15px;
+  width: 100%;
+  position: relative;
+  background-color: rgb(100, 255, 218);
+  margin-left: -20px;
+  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+  border-radius: 3px;
+}
+.ref-img::before {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(10, 25, 47);
+  mix-blend-mode: screen;
+
+  /*  */
+
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+}
+.ref-img::after {
+  top: 20px;
+  left: 20px;
+  z-index: -1;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgb(100, 255, 218);
+  border-image: initial;
+  /*  */
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+}
+.ref-img:hover {
+  background: transparent;
+}
+.ref-img:hover::after {
+  top: 15px;
+  left: 15px;
+}
+.img-wrapper {
+  border-radius: 3px;
+  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+  filter: grayscale(100%) contrast(1);
+  mix-blend-mode: multiply;
+}
+
 .about-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(140px, 200px));
@@ -59,4 +134,48 @@
   color: black;
   font-size: 14px;
   line-height: 12px;
+}
+
+/* NEW STYLES */
+
+.section-name {
+  position: relative;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 100%;
+  font-size: 28px;
+  white-space: nowrap;
+  margin: 10px 0px 40px;
+  font-weight: 700;
+}
+
+.section-name::before {
+  position: relative;
+  counter-increment: section 1;
+  content: "0" counter(section) ".";
+  margin-right: 10px;
+  font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono",
+    "Lucida Console", Monaco, monospace;
+  font-weight: normal;
+  color: blueviolet;
+  font-size: 20px;
+  bottom: -4px;
+}
+
+.section-name::after {
+  position: relative;
+  content: "";
+  display: block;
+  height: 1px;
+  width: 300px;
+  background-color: blueviolet;
+  /* top: 4px; */
+  margin-left: 20px;
+}
+
+@media (max-width: 48em) {
+  .main-container {
+    padding: 0px 50px;
+  }
 }

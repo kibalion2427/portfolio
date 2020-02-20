@@ -25,7 +25,7 @@ const App = () => {
         <div className="main-container">
           <About data={aboutData} />
           <About data={aboutData} />
-          <Work />
+          {/* <Work /> */}
           <Projects />
           <Contact />
         </div>
