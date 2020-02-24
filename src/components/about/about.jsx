@@ -143,6 +143,7 @@ const About = ({ data }) => {
   const { skills, textAbout, avatar, github } = about;
   const revealContainer = useRef(null);
   useEffect(() => sr.reveal(revealContainer.current, srConfig()), []);
+  console.log("about", about);
 
   return (
     <StyledContainer id="about" ref={revealContainer}>

@@ -7,13 +7,14 @@ import Projects from "../projects/project";
 import Contact from "../contact/contact";
 import Work from "../works/work";
 import Presentation from "../presentation/presentation";
-import aboutData from "../../data/aboutData.js";
 import { GlobalStyle, theme } from "@styles";
+import { aboutData, workData } from "@data";
 const App = () => {
-  const [adata, setAData] = useState(aboutData);
-  useEffect(() => {
-    setAData(aboutData);
-  });
+  // const [aboutData, setAboutData] = useState(aboutData);
+  // const [adata, setAData] = useState(aboutData);
+  // useEffect(() => {
+  //   setAData(aboutData);
+  // });
 
   return (
     <div className="layout">
@@ -23,7 +24,7 @@ const App = () => {
         <Presentation />
         <div className="main-container">
           <About data={aboutData} />
-          {/* <Work /> */}
+          <Work data={workData} />
           <Projects />
           <Contact />
         </div>

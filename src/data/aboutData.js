@@ -1,18 +1,3 @@
-// var aboutData = {
-//   about: {
-//     text:
-//       "Hello! I'm Brittany, a software engineer based in Boston, MA who enjoys building things that live on the internet. I develop exceptional websites and web apps that provide intuitive, pixel-perfect user interfaces with efficient and modern backends.",
-//     skills: [
-//       "Python",
-//       "Javascript (ES6+)",
-//       "ASP NET Core",
-//       "Java EE 8",
-//       "React",
-//       "HTML & (S)CSS"
-//     ]
-//   }
-// };
-
 var aboutData = {
   about: {
     autor: "roger luje.",
