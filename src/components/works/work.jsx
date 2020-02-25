@@ -87,6 +87,39 @@ const StyledTabButton = styled.button`
   }
 `;
 
+const StyledHighLight = styled.span`
+  display: block;
+  background: ${colors.green};
+  height: ${theme.tabHeight}px;
+  border-radius: ${theme.borderRadius};
+  width: 2px;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(
+    ${props =>
+      props.activeTabId > 0 ? props.activeTabId * theme.tabHeight : 0}px
+  );
+  transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition-delay: 0.1s;
+  ${media.thone`
+  width:100%;
+  max-width: ${theme.tabWidth}px;
+  height:2px;
+  margin-left:50px;
+  top:auto;
+  bottom:0;
+  transform: translateX(
+      ${props =>
+        props.activeTabId > 0 ? props.activeTabId * theme.tabWidth : 0}px
+    );
+  `};
+  ${media.phablet`
+    margin-left: 25px;
+  `};
+`;
+
 const Work = ({ data }) => {
   const revealContainer = useRef(null);
   useEffect(() => sr.reveal(revealContainer.current, srConfig()), []);
@@ -101,7 +134,6 @@ const Work = ({ data }) => {
       <Heading>Where I've worked</Heading>
       <StyledTabContainer>
         <StyledTabList role="tablist" aria-label="Job List">
-          {/* {workData.map(return <li> <StyledTabButton/></li>)} */}
           {work &&
             work.map((item, index) => {
               const { company } = item.details;
@@ -124,6 +156,7 @@ const Work = ({ data }) => {
                 </li>
               );
             })}
+          <StyledHighLight activeTabId={activeTabId} />
         </StyledTabList>
 
         {/* <StledTabContent>
