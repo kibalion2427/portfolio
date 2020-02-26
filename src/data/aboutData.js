@@ -3,7 +3,7 @@ var aboutData = {
     autor: "roger luje.",
     avatar: "./me.jpg",
     sentence: "I build software solutions.",
-    textAbout: `I am a computer science engineer based in Ecuador,specializing
+    textAbout: `I'm a computer science engineer based in Ecuador,specializing
                 in building (and occasionally designing) exceptional,
                 high-quality websites and applications. 
                 I develop modern intuitive interfaces with efficient backends.

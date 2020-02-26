@@ -21,7 +21,8 @@ const StyledFlexContainer = styled.div`
 const StyledContent = styled.div`
   width: 60%;
   max-width: 480px;
-  white-space: pre-line;
+  /* white-space: pre-line; */
+  text-align: justify;
   margin: 0px 0px;
   ${media.tablet`width:100%;`};
   a {
@@ -150,7 +151,10 @@ const About = ({ data }) => {
       <Heading>About me</Heading>
       <StyledFlexContainer>
         <StyledContent>
-          <div dangerouslySetInnerHTML={{ __html: textAbout }} />
+          <div
+            dangerouslySetInnerHTML={{ __html: "<p>" + textAbout + "</p>" }}
+          />
+
           <StyledSkillsContainer>
             {skills &&
               skills.map((skill, index) => (
