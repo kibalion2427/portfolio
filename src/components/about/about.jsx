@@ -143,7 +143,7 @@ const About = ({ data }) => {
   const { skills, textAbout, avatar, github } = about;
   const revealContainer = useRef(null);
   useEffect(() => sr.reveal(revealContainer.current, srConfig()), []);
-  console.log("about", about);
+  // console.log("about", about);
 
   return (
     <StyledContainer id="about" ref={revealContainer}>
@@ -168,32 +168,5 @@ const About = ({ data }) => {
     </StyledContainer>
   );
 };
-//   return (
-//     <section className="about-section" id="about" ref={revealContainer}>
-//       <h3 className="section-name">About Me</h3>
-
-//       <div className="content-about">
-//         <div className="about-text">
-//           <div>
-//             <p>{about.textAbout}</p>
-//           </div>
-//           <ul className="about-list">
-//             {about.skills.map((item, index) => (
-//               <li key={index}>{item}</li>
-//             ))}
-//           </ul>
-//         </div>
-//         <div className="about-img">
-//           <a href="#" className="ref-img">
-//             <div className="img-wrapper">
-//               <div style={{ width: 100 + "%", paddingBottom: 100 + "%" }} />
-//             </div>
-//           </a>
-//         </div>
-//         {/* <a href="#" className="about-img" /> */}
-//       </div>
-//     </section>
-//   );
-// };
 
 export default About;

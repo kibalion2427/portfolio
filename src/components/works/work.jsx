@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
 import { srConfig } from "@config";
 import sr from "@utils/sr";
 import styled from "styled-components";
@@ -120,6 +121,42 @@ const StyledHighLight = styled.span`
   `};
 `;
 
+const StyledTabContent = styled.div`
+  width: 100%;
+  height: auto;
+  padding-top: 12px;
+  padding-left: 30px;
+  align-items: justify;
+  ${media.tablet`padding-left: 20px;`};
+  ${media.thone`padding-left: 0;`};
+  ul {
+    ${mixins.fancyList};
+  }
+  a {
+    ${mixins.inlineLink};
+  }
+`;
+
+const StyledJobTitle = styled.div`
+  color: ${colors.lightestSlate};
+  font-size: ${fontSizes.xxl};
+  font-weight: 500;
+  margin-bottom: 5px;
+`;
+
+const StyledCompany = styled.span`
+  color: ${colors.green};
+`;
+
+const StyledJobRange = styled.h5`
+  color: ${colors.lightestSlate};
+  font-weight: normal;
+  font-size: ${fontSizes.smish};
+  font-family: ${fontSizes.SFMono};
+  letter-spacing: 0.05em;
+  margin-bottom: 30px;
+`;
+const StyledJobDetails = styled.ul``;
 const Work = ({ data }) => {
   const revealContainer = useRef(null);
   useEffect(() => sr.reveal(revealContainer.current, srConfig()), []);
@@ -129,9 +166,12 @@ const Work = ({ data }) => {
 
   const [activeTabId, setActiveTabId] = useState(0);
 
+  const splitHtml = (html, character) => {
+    return html.toString().split(character);
+  };
   return (
     <StyledContainer id="works" ref={revealContainer}>
-      <Heading>Where I've worked</Heading>
+      <Heading>Where I&apos;ve worked</Heading>
       <StyledTabContainer>
         <StyledTabList role="tablist" aria-label="Job List">
           {work &&
@@ -159,18 +199,56 @@ const Work = ({ data }) => {
           <StyledHighLight activeTabId={activeTabId} />
         </StyledTabList>
 
-        {/* <StledTabContent>
-          <StyledJobTitle></StyledJobTitle>
-          <StyledJobDate></StyledJobDate>
-          <div dangerouslySetInnerHTML={{ __html: data }} />
-        </StledTabContent> */}
+        {work &&
+          work.map((item, index) => {
+            const { company, title, range, url, html } = item.details;
+            const htmlList = splitHtml(html, "+");
+            return (
+              <StyledTabContent
+                key={index}
+                isActive={activeTabId === index}
+                id={`panel-${index}`}
+                role="tabpanel"
+                aria-labelledby={`tab-${index}`}
+                tabIndex={activeTabId === index ? "0" : "-1"}
+                hidden={activeTabId !== index}
+              >
+                <StyledJobTitle>
+                  <span>{title}</span>
+                  <StyledCompany>
+                    <span>&nbsp;@&nbsp;</span>
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="nofollow noopener noreferrer"
+                    >
+                      {company}
+                    </a>
+                  </StyledCompany>
+                </StyledJobTitle>
+                <StyledJobRange>
+                  <span>{range}</span>
+                </StyledJobRange>
+
+                <StyledJobDetails>
+                  {htmlList.map((item, index) => {
+                    return (
+                      <li key={index}>
+                        <div dangerouslySetInnerHTML={{ __html: item }} />
+                      </li>
+                    );
+                  })}
+                </StyledJobDetails>
+              </StyledTabContent>
+            );
+          })}
       </StyledTabContainer>
     </StyledContainer>
   );
 };
 
-// Work.propTypes = {
-//   data: PropTypes.array.isRequired
-// };
+Work.propTypes = {
+  data: PropTypes.object.isRequired
+};
 
 export default Work;
