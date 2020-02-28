@@ -166,7 +166,7 @@ const Work = ({ data }) => {
 
   const [activeTabId, setActiveTabId] = useState(0);
 
-  const splitHtml = (html, character) => {
+  const getActivitiesFromHtml = (html, character) => {
     return html.toString().split(character);
   };
   return (
@@ -202,7 +202,7 @@ const Work = ({ data }) => {
         {work &&
           work.map((item, index) => {
             const { company, title, range, url, html } = item.details;
-            const htmlList = splitHtml(html, "+");
+            const activities = getActivitiesFromHtml(html, "+");
             return (
               <StyledTabContent
                 key={index}
@@ -231,10 +231,10 @@ const Work = ({ data }) => {
                 </StyledJobRange>
 
                 <StyledJobDetails>
-                  {htmlList.map((item, index) => {
+                  {activities.map((activity, index) => {
                     return (
                       <li key={index}>
-                        <div dangerouslySetInnerHTML={{ __html: item }} />
+                        <div dangerouslySetInnerHTML={{ __html: activity }} />
                       </li>
                     );
                   })}

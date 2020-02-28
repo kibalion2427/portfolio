@@ -1,14 +1,20 @@
 import React, { Component } from "react";
+import styled from "styled-components";
+import { theme, Section, Heading } from "@styles";
+const { colors } = theme;
 
-class Project extends Component {
-  state = {};
-  render() {
-    return (
-      <div className="projects-section" id="projects">
-        Projects
-      </div>
-    );
-  }
-}
+const StyledContainer = styled(Section)`
+  /* background-color: ${colors.blue}; */
+  /* width: 100%; */
+  position:relative;
+`;
+
+const Project = () => {
+  return (
+    <StyledContainer>
+      <Heading>Some things I&apos;ve build</Heading>
+    </StyledContainer>
+  );
+};
 
 export default Project;
