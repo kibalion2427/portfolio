@@ -1,0 +1,30 @@
+{
+  "app": {
+    "name": "markdown-json",
+    "cwd": "./",
+    "src": "content/",
+    "filePattern": "**/*.md",
+    "ignore": "*(icon|input)*",
+    "dist": "src/json/data.json",
+    "display": true,
+    "version": "1.4.1"
+  },
+  "data": [
+    {
+      "title": "About Me",
+      "avatar": "./me.jpg",
+      "skills": [
+        "JavaScript (ES6+)",
+        "HTML & (S)CSS",
+        "React",
+        "Vue",
+        "Node.js",
+        "Express",
+        "NativeScript"
+      ],
+      "contents": "<p>Hello! I&#39;m Brittany, a software engineer based in Boston, MA who enjoys building things that live on the internet. I develop exceptional websites and web apps that provide intuitive, pixel-perfect user interfaces with efficient and modern backends.</p>\n<p>Shortly after graduating from <a href=\"https://www.ccis.northeastern.edu/\">Northeastern University</a>, I joined the engineering team at <a href=\"https://www.upstatement.com/\">Upstatement</a> where I work on a wide variety of interesting and meaningful projects on a daily basis.</p>\n<p>Here are a few technologies I&#39;ve been working with recently:</p>\n",
+      "excerpt": "<p>Hello! I&apos;m Brittany, a software engineer based in Boston, MA who enjoys building things that live on the internet. I develop exceptional websites and web apps that provide intuitive, pixel-perfect user interfaces with efficient and modern backends.</p>",
+      "id": "about__index"
+    }
+  ]
+}
