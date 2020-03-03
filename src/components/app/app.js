@@ -23,14 +23,14 @@ const aboutData = () => {
 };
 
 const App = () => {
-  // const [aboutData, setAboutData] = useState(aboutData);
+  const [about, setAbout] = useState(aboutData());
   // const [adata, setAData] = useState(aboutData);
   // useEffect(() => {
   //   setAData(aboutData);
   // });
 
   // const [aboutData, setAboutData] = useState(data);
-  console.log("app:", aboutData());
+  console.log("app about", about);
 
   return (
     <div className="layout">
@@ -39,7 +39,7 @@ const App = () => {
       <div className="content">
         <Presentation />
         <div className="main-container">
-          {/* <About data={aboutData} /> */}
+          <About data={about} />
           {/* <Work data={workData} /> */}
           <Projects />
           <Contact />

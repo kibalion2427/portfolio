@@ -140,20 +140,21 @@ const StyledAvatarLink = styled.a`
 //CSS STYLES
 
 const About = ({ data }) => {
-  const { about } = data;
-  const { skills, textAbout, avatar, github } = about;
+  // const { about } = data;
+  // const { skills, textAbout, avatar, github } = about;
+  // const { skills, content } = about;
+  const { skills, contents } = data[0];
+
   const revealContainer = useRef(null);
   useEffect(() => sr.reveal(revealContainer.current, srConfig()), []);
-  // console.log("about", about);
+  // console.log("about", contents);
 
   return (
     <StyledContainer id="about" ref={revealContainer}>
       <Heading>About me</Heading>
       <StyledFlexContainer>
         <StyledContent>
-          <div
-            dangerouslySetInnerHTML={{ __html: "<p>" + textAbout + "</p>" }}
-          />
+          <div dangerouslySetInnerHTML={{ __html: contents }} />
 
           <StyledSkillsContainer>
             {skills &&
@@ -164,7 +165,8 @@ const About = ({ data }) => {
         </StyledContent>
         {/* <StyledTest /> */}
         <StyledPic>
-          <StyledAvatarLink href={github}>
+          {/* <StyledAvatarLink href={github}> */}
+          <StyledAvatarLink>
             <StyledAvatar alt="Avatar" />
           </StyledAvatarLink>
         </StyledPic>
