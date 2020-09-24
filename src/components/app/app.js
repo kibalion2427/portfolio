@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
-import logo from "../../images/azure.svg";
-import "../app/app.css";
-import Navbar from "../globals/navbar";
-import About from "../about/about";
-import Projects from "../projects/project";
-import Contact from "../contact/contact";
-import Work from "../works/work";
-import Presentation from "../presentation/presentation";
-import { GlobalStyle, theme } from "@styles";
-// import { aboutData, workData } from "@data";
+import {
+  Layout,
+  Presentation,
+  About,
+  Projects,
+  Contact,
+  Jobs,
+} from "@components";
+import {workData} from "@data"
+import styled from "styled-components";
 
 import output from "../../json/data.json";
 
-const filterData = query => {
+const filterData = (query) => {
   return output.data.filter(
-    item => item.id.toLowerCase().indexOf(query.toLowerCase()) > -1
+    (item) => item.id.toLowerCase().indexOf(query.toLowerCase()) > -1
   );
 };
 
@@ -22,30 +22,23 @@ const aboutData = () => {
   return filterData("about");
 };
 
+const StyledMainContainer = styled.main`
+  counter-reset: section;
+`;
+
 const App = () => {
   const [about, setAbout] = useState(aboutData());
-  // const [adata, setAData] = useState(aboutData);
-  // useEffect(() => {
-  //   setAData(aboutData);
-  // });
-
-  // const [aboutData, setAboutData] = useState(data);
-  console.log("app about", about);
 
   return (
-    <div className="layout">
-      <GlobalStyle />
-      <Navbar />
-      <div className="content">
+    <Layout>
+      <StyledMainContainer className="fillHeight">
         <Presentation />
-        <div className="main-container">
-          <About data={about} />
-          {/* <Work data={workData} /> */}
-          <Projects />
-          <Contact />
-        </div>
-      </div>
-    </div>
+        <About data={about} />
+        <Jobs data={workData}/>
+        <Projects />
+        <Contact />
+      </StyledMainContainer>
+    </Layout>
   );
 };
 

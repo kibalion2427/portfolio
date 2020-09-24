@@ -6,7 +6,7 @@ var workData = {
         title: "Software Developer",
         location: "Quito",
         url: "easysoft.com",
-        range: "March 2018 - November 2019",
+        range: "March 2018 - January 2020",
         html: `
             + Develop of modules for banking customers of Ecuador using C#, Python and JS
             + Engineered and mantained code for in-house and client websites primarly using C# and Silverlight

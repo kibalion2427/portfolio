@@ -1,12 +1,12 @@
 import React, { Component, useEffect, useRef, useState } from "react";
 import Title from "../globals/title/title";
-import "../about/about.css";
-import { srConfig, autor } from "@config";
+import me from "../../data/me.jpg";
+import { srConfig, autor, github } from "@config";
 import sr from "@utils/sr";
 import styled from "styled-components";
 import { theme, mixins, media, Section, Heading, Square } from "@styles";
 const { colors, fontSizes, fonts } = theme;
-import me from "../../data/me.jpg";
+
 // CSS STYLES
 const StyledContainer = styled(Section)`
   position: relative;
@@ -28,12 +28,6 @@ const StyledContent = styled.div`
   a {
     ${mixins.inlineLink}
   }
-`;
-
-const StyledTest = styled.div`
-  width: 40%;
-  min-height: 200px;
-  background-color: red;
 `;
 
 const StyledSkillsContainer = styled.ul`
@@ -79,18 +73,11 @@ const StyledPic = styled.div`
 `;
 
 const StyledAvatar = styled(Square)`
-  /* position: relative; */
   mix-blend-mode: multiply;
   filter: grayscale(100%) contrast(1);
   border-radius: ${theme.borderRadius};
   transition: ${theme.transition};
-  /* height: 300px; */
-  /* width: 100%; */
-  /* padding-bottom: 100%; */
-  /* background-position: center center; */
-  /* background-repeat: no-repeat; */
   background-image: url(${me});
-  /* background-size: cover; */
 `;
 const StyledAvatarLink = styled.a`
   ${mixins.boxShadow};
@@ -140,22 +127,39 @@ const StyledAvatarLink = styled.a`
 //CSS STYLES
 
 const About = ({ data }) => {
-  // const { about } = data;
-  // const { skills, textAbout, avatar, github } = about;
-  // const { skills, content } = about;
-  const { skills, contents } = data[0];
+  const { title, contents } = data[0];
 
   const revealContainer = useRef(null);
   useEffect(() => sr.reveal(revealContainer.current, srConfig()), []);
-  // console.log("about", contents);
-
+  const skills = ['JavaScript (ES6+)', 'HTML & (S)CSS', 'React', 'Python', 'Node.js', 'AWS'];
   return (
     <StyledContainer id="about" ref={revealContainer}>
-      <Heading>About me</Heading>
+      <Heading>About Me</Heading>
       <StyledFlexContainer>
         <StyledContent>
-          <div dangerouslySetInnerHTML={{ __html: contents }} />
+          <p>
+            Hello! I'm Roger, a computer engineer based in Ecuador.
+          </p>
 
+          <p>
+            I enjoy designing architectures about websites, applications and
+            implementing them using modern frontend and backend frameworks. I
+            always like to work with with UI/UX and SOLID best practices, to
+            provide performant experiences.
+          </p>
+
+          <p>
+            Before graduating from{" "}
+            <a href="https://www.espe.edu.ec">
+              Espe University
+            </a>
+            , I joined the engineering team at{" "}
+            <a href="https://www.easysoft.com">Easysoft</a> where I work
+            on a wide variety of interesting and meaningful projects about banking solutions.
+          </p>
+
+          <p>Here are a few technologies I've been working with recently:</p>
+          {/* <div dangerouslySetInnerHTML={{ __html: contents }} /> */}
           <StyledSkillsContainer>
             {skills &&
               skills.map((skill, index) => (
@@ -163,10 +167,8 @@ const About = ({ data }) => {
               ))}
           </StyledSkillsContainer>
         </StyledContent>
-        {/* <StyledTest /> */}
         <StyledPic>
-          {/* <StyledAvatarLink href={github}> */}
-          <StyledAvatarLink>
+          <StyledAvatarLink href={github}>
             <StyledAvatar alt="Avatar" />
           </StyledAvatarLink>
         </StyledPic>

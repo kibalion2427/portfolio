@@ -1,5 +1,7 @@
 module.exports = {
   autor: "roger luje.",
+  github: "https://github.com/kibalion2427",
+  email:"roger1994a@gmail.com",
   srConfig: (delay = 200) => ({
     origin: "bottom",
     distance: "20px",

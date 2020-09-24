@@ -1,0 +1,13 @@
+{
+  "app": {
+    "name": "markdown-json",
+    "cwd": "./",
+    "src": "src/content/projects/",
+    "filePattern": "**/*.md",
+    "ignore": "*(icon|input)*",
+    "dist": "src/json/test.json",
+    "display": true,
+    "version": "1.4.1"
+  },
+  "data": []
+}

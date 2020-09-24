@@ -1,4 +1,4 @@
-import aboutData from "./aboutData";
-import workData from "./workData";
+import aboutData from "./about";
+import workData from "./work";
 
 export { aboutData, workData };

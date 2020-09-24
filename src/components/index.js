@@ -1,0 +1,8 @@
+export {default as Presentation} from "./sections/presentation"
+export {default as About} from "./sections/about"
+export {default as Contact} from "./sections/contact"
+export {default as Jobs} from "./sections/work"
+export {default as Projects} from "./sections/project"
+export {default as Nav} from "./globals/navbar"
+export {default as Footer} from "./globals/footer"
+export {default as Layout} from "./layout"
