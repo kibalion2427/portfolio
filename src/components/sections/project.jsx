@@ -344,7 +344,11 @@ const Project = () => {
                 </div>
 
                 <div className="project-image">
-                  <a href={external ? external : github ? github : "#"}>
+                  <a
+                    href={external ? external : github ? github : "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <StyledImageWrapper>
                       <div
                         aria-hidden="true"
@@ -359,11 +363,6 @@ const Project = () => {
                         className="img"
                         src={require(`../../content/projects/images/${cover}`)}
                       />
-                      {/* <picture>
-                        <StyledPicture
-                            src={require(`../../content/projects/images/${cover}`)}
-                          />
-                      </picture> */}
                     </StyledImageWrapper>
                   </a>
                 </div>

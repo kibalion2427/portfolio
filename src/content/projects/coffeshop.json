@@ -1,13 +1,12 @@
 {
-    "attributes": {
-      "date": "2",
-      "title": "CoffeShop",
-      "cover": "coffeshop.png",
-      "github": "https://github.com/bchiang7/spotify-profile",
-      "external": "https://gatsby-coffeshop.netlify.app/",
-      "tech": ["Gatsby", "Contentful CMS", "SnipCart","FormsPree"],
-      "showInProjects": true
-    },
-    "body": "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.\n"
-  }
-  
+  "attributes": {
+    "date": "2",
+    "title": "CoffeShop",
+    "cover": "coffeshop.png",
+    "github": "https://github.com/kibalion2427/gatsby-coffe",
+    "external": "https://gatsby-coffeshop.netlify.app/",
+    "tech": ["Gatsby", "Contentful CMS", "SnipCart", "FormsPree"],
+    "showInProjects": true
+  },
+  "body": "An e-commerce about coffe products using SnipCart component to handle payments. To create new products I use a HeadLess CMS to make the administrator's job easy.\n"
+}

@@ -1,6 +1,5 @@
 import React, { Component, useEffect, useRef, useState } from "react";
-import Title from "../globals/title/title";
-import me from "../../data/me.jpg";
+import me from "../../data/foto4.png";
 import { srConfig, autor, github } from "@config";
 import sr from "@utils/sr";
 import styled from "styled-components";
@@ -73,7 +72,9 @@ const StyledPic = styled.div`
 `;
 
 const StyledAvatar = styled(Square)`
+  background-size: 100% 100% !important;
   mix-blend-mode: multiply;
+  height: 100%;
   filter: grayscale(100%) contrast(1);
   border-radius: ${theme.borderRadius};
   transition: ${theme.transition};
@@ -131,15 +132,20 @@ const About = ({ data }) => {
 
   const revealContainer = useRef(null);
   useEffect(() => sr.reveal(revealContainer.current, srConfig()), []);
-  const skills = ['JavaScript (ES6+)', 'HTML & (S)CSS', 'React', 'Python', 'Node.js', 'AWS'];
+  const skills = [
+    "JavaScript (ES6+)",
+    "HTML & (S)CSS",
+    "React",
+    "Python",
+    "Node.js",
+    "AWS",
+  ];
   return (
     <StyledContainer id="about" ref={revealContainer}>
       <Heading>About Me</Heading>
       <StyledFlexContainer>
         <StyledContent>
-          <p>
-            Hello! I'm Roger, a computer engineer based in Ecuador.
-          </p>
+          <p>Hello! I'm Roger, a computer engineer based in Ecuador.</p>
 
           <p>
             I enjoy designing architectures about websites, applications and
@@ -150,12 +156,10 @@ const About = ({ data }) => {
 
           <p>
             Before graduating from{" "}
-            <a href="https://www.espe.edu.ec">
-              Espe University
-            </a>
-            , I joined the engineering team at{" "}
-            <a href="https://www.easysoft.com">Easysoft</a> where I work
-            on a wide variety of interesting and meaningful projects about banking solutions.
+            <a href="https://www.espe.edu.ec">Espe University</a>, I joined the
+            engineering team at <a href="https://www.easysoft.com">Easysoft</a>{" "}
+            where I work on a wide variety of interesting and meaningful
+            projects about banking solutions.
           </p>
 
           <p>Here are a few technologies I've been working with recently:</p>
