@@ -10,22 +10,15 @@ import { theme, mixins, media } from "@styles";
 const { colors, fontSizes, fonts } = theme;
 
 const StyledLogo = styled.div`
-  ${mixins.flexCenter};
+  display: flex;
+  padding-bottom: 10px;
+  transition: var(--transition);
   a {
-    display: block;
-    color: ${colors.blue};
-    width: 42px;
-    height: 42px;
-    &:hover,
-    &:focus {
-      svg {
-        fill: ${colors.blue};
-      }
-    }
-    svg {
-      fill: none;
-      transition: ${theme.transition};
-      user-select: none;
+    width: 150px;
+    height: 150px;
+    @media (max-width: 768px) {
+      width: 90px;
+      height: 90px;
     }
   }
 `;
@@ -46,6 +39,7 @@ const StyledList = styled.ul`
   flex-direction: row;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 0px;
 
   li {
     text-align: center;
@@ -113,7 +107,10 @@ class Navbar extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-sm">
+      <nav
+        className="navbar navbar-expand-sm"
+        style={{ verticalAlign: "middle" }}
+      >
         {/* logo */}
         <StyledLogo tabindex="-1">
           <a href="/" aria-label="home">

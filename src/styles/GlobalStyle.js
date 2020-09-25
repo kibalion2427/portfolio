@@ -144,6 +144,11 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+nav{
+  @media (max-width: 768px) {
+      padding: 0px !important;
+    }
+}
   section {
     margin: 0 auto;
     padding: 100px 0;
