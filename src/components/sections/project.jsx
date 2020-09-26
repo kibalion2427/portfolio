@@ -4,9 +4,6 @@ import { theme, Section, Heading } from "@styles";
 import { srConfig } from "@config";
 import sr from "@utils/sr";
 import { Icon } from "@components/icons";
-import { Square } from "@styles";
-
-import chat from "../../content/projects/images/chat.png";
 
 const StyledContainer = styled(Section)`
   position: relative;

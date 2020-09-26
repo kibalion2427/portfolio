@@ -1,169 +1,396 @@
 import React, { Component } from "react";
 import { Link, animateScroll as scroll } from "react-scroll";
-import { FaRegUser, FaProjectDiagram } from "react-icons/fa";
-import { IoIosRocket } from "react-icons/io";
-import { MdContactPhone } from "react-icons/md";
-import { GiDoctorFace } from "react-icons/gi";
-import { Icon } from "@components/icons";
 import styled from "styled-components";
+import { Helmet } from "react-helmet";
+import { navHeight, email, cv,sections } from "@config";
+import { throttle } from "@utils";
+import { Icon } from "@components/icons";
 import { theme, mixins, media } from "@styles";
 const { colors, fontSizes, fonts } = theme;
 
+const StyledContainer = styled.div`
+  ${mixins.flexBetween}
+  position:fixed;
+  top: 0;
+  padding: 0px 50px;
+  background-color: transparent;
+  z-index: 11;
+  filter: none !important;
+  pointer-events: auto !important;
+  user-select: auto !important;
+  width: 100%;
+  transition: var(--transition);
+  color: ${colors.navy};
+  height: ${(props) =>
+    props.scrollDirection === "none" ? theme.navHeight : theme.navScrollHeight};
+  transform: translateY(
+    ${(props) =>
+      props.scrollDirection === "down" ? `-${theme.navScrollHeight}` : "0"}
+  );
+  ${media.desktop`padding:0 40px;`}
+  ${media.tablet`padding: 0 25px;`}
+`;
+
+const StyledNav = styled.div`
+  ${mixins.flexBetween}
+  position: relative;
+  width: 100%;
+  color: ${colors.lightestSlate};
+  font-family: ${fonts.SFMono};
+  counter-reset: item 0;
+  z-index: 12;
+`;
+
 const StyledLogo = styled.div`
-  display: flex;
-  padding-bottom: 10px;
-  transition: var(--transition);
+  /* ${mixins.flexCenter} */
+  color: ${colors.green};
+  margin-left: -35px !important;
   a {
-    width: 150px;
-    height: 150px;
-    @media (max-width: 768px) {
-      width: 90px;
-      height: 90px;
-    }
-  }
-`;
-
-const StyledIcon = styled.div`
-  height: 30px;
-  margin: 0 auto 10px;
-  i {
-    color: var(--green) !important;
-  }
-`;
-
-const StyledList = styled.ul`
-  transition: var(--transition);
-  /* transition: all 5s ease-out; */
-  display: flex;
-  padding-left: 0;
-  flex-direction: row;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0px;
-
-  li {
-    text-align: center;
-    list-style: none;
+    font-weight: bold;
     display: block;
-    border-right: 1px solid var(--green);
-    margin-top: 10px;
-    .text-link {
-      /* color: rgb(204, 214, 249); */
-      color: white;
-      font-weight: 500;
-    }
-    .link-to {
-      text-decoration: none;
-      padding: 0px 50px;
-      display: block;
-
-      @media (max-width: 1050px) {
-        padding: 0 30px;
-      }
-      @media (max-width: 760px) {
-        padding: 0 20px;
-      }
-    }
-    &:last-child {
-      border-right: none;
-    }
+    color: ${colors.dark};
+    width: 100px;
+    height: 100px;
   }
 `;
+
+const StyledLink = styled.div`
+  display: flex;
+  align-items: center;
+  ${media.tablet`display: none;`};
+  .resume-button {
+    ${({ theme }) => theme.mixins.smallButton};
+    margin-left: 15px;
+    font-size: var(--fz-xs);
+  }
+`;
+
+const StyledList = styled.ol`
+  ${mixins.flexBetween};
+  padding: 0;
+  margin: 0;
+  list-style: none;
+`;
+
+const StyledListItem = styled.li`
+  position: relative;
+  font-size: ${fontSizes.smish};
+  counter-increment: item 1;
+  transition: ${theme.transition};
+  padding: 0px 20px;
+
+  a {
+    display: inline-block;
+    padding: 0px 20px;
+    font-size: 13px;
+    color: var(--lightest-slate);
+    font-family: ${fonts.HK};
+    text-transform: uppercase;
+  }
+  a:hover {
+    color: ${colors.celeste};
+  }
+  .active {
+    color: ${colors.celeste};
+  }
+`;
+
+const StyledHamburguer = styled.div`
+  display: none;
+
+  @media (max-width: 768px) {
+    ${({ theme }) => theme.mixins.flexCenter};
+    position: relative;
+    z-index: 10;
+    margin-right: -15px;
+    padding: 15px;
+    border: 0;
+    background-color: transparent;
+    color: inherit;
+    text-transform: none;
+    transition-timing-function: linear;
+    transition-duration: 0.15s;
+    transition-property: opacity, filter;
+  }
+`;
+
+const StyledhaburguerBox = styled.div`
+  position: relative;
+  display: inline-block;
+  width: ${theme.hamburgerWidth}px;
+  height: 24px;
+`;
+
+const StyledHamburguerInner = styled.div`
+  background-color: ${colors.green};
+  position: absolute;
+  width: ${theme.hamburgerWidth}px;
+  height: 2px;
+  border-radius: ${theme.borderRadius};
+  top: 50%;
+  left: 0;
+  right: 0;
+  transition-duration: 0.22s;
+  transition-property: transform;
+  transition-delay: ${(props) => (props.menuOpen ? `0.12s` : `0s`)};
+  transform: rotate(${(props) => (props.menuOpen ? `225deg` : `0deg`)});
+  transition-timing-function: cubic-bezier(
+    ${(props) =>
+      props.menuOpen ? `0.215, 0.61, 0.355, 1` : `0.55, 0.055, 0.675, 0.19`}
+  );
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+    background-color: ${colors.green};
+    position: absolute;
+    left: auto;
+    right: 0;
+    width: ${theme.hamburgerWidth}px;
+    height: 2px;
+    transition-timing-function: ease;
+    transition-duration: 0.15s;
+    transition-property: transform;
+    border-radius: 4px;
+  }
+  &:before {
+    width: ${(props) => (props.menuOpen ? `100%` : `120%`)};
+    top: ${(props) => (props.menuOpen ? `0` : `-10px`)};
+    opacity: ${(props) => (props.menuOpen ? 0 : 1)};
+    transition: ${(props) =>
+      props.menuOpen ? theme.hamBeforeActive : theme.hamBefore};
+  }
+  &:after {
+    width: ${(props) => (props.menuOpen ? `100%` : `80%`)};
+    bottom: ${(props) => (props.menuOpen ? `0` : `-10px`)};
+    transform: rotate(${(props) => (props.menuOpen ? `-90deg` : `0`)});
+    transition: ${(props) =>
+      props.menuOpen ? theme.hamAfterActive : theme.hamAfter};
+  }
+`;
+
+const StyledSideBar = styled.aside`
+  display: none;
+  @media (max-width: 768px) {
+    ${({ theme }) => theme.mixins.flexCenter};
+    visibility: ${(props) => (props.menuOpen ? "visible" : "hidden")};
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding: 50px 10px;
+    width: min(75vw, 400px);
+    height: 100vh;
+    outline: 0;
+    z-index: 9;
+    box-shadow: -10px 0px 30px -15px var(--navy-shadow);
+    background-color: var(--light-navy);
+    transform: translateX(${(props) => (props.menuOpen ? 0 : 100)}vw);
+    transition: var(--transition);
+  }
+
+  nav {
+    ${({ theme }) => theme.mixins.flexBetween}
+    width:100%;
+    flex-direction: column;
+    color: var(--lightest-slate);
+    font-family: var(--font-mono);
+    text-align: center;
+  }
+  ul {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    li {
+      position: relative;
+      margin: 0 auto 50px;
+      counter-increment: item 1;
+      font-size: clamp(var(--fz-sm), 4vw, var(--fz-lg));
+      text-transform: uppercase;
+      ${media.thone`margin: 0 auto 30px;`}
+    }
+    a {
+      ${({ theme }) => theme.mixins.link};
+      width: 100%;
+      padding: 3px 20px 20px;
+    }
+  }
+  .resume-link {
+    ${({ theme }) => theme.mixins.bigButton};
+    padding: 18px 50px;
+    margin: 10% auto 0;
+    width: max-content;
+  }
+`;
+
+const DELTA = 5;
 
 class Navbar extends Component {
   state = {
-    navBarOpen: false,
-    toggleActive: false,
-    css: "collapse navbar-collapse",
+    menuOpen: false,
+    scrollDirection: "none",
+    isHome: this.isHome(window.location.pathname),
+    isMounted: !this.isHome,
+
     sections: [
-      { id: 1, name: "about", text: "about", icon: <GiDoctorFace /> },
-      { id: 2, name: "works", text: "experience", icon: <IoIosRocket /> },
-      { id: 3, name: "projects", text: "projects", icon: <FaProjectDiagram /> },
-      { id: 4, name: "contact", text: "contact", icon: <MdContactPhone /> },
+      { id: 1, name: "about", text: "about" },
+      { id: 2, name: "works", text: "experience" },
+      { id: 3, name: "projects", text: "projects" },
+      { id: 4, name: "contact", text: "contact" },
     ],
   };
 
-  navBarHandler = () => {
-    let isNavOpen = this.state.navBarOpen;
-    let isToggleActive = this.state.toggleActive;
-    let cssClosedToggle = "collapse navbar-collapse";
-    let cssOpenedToggle = "collapse navbar-collapse show";
-    isNavOpen
-      ? this.setState({ navBarOpen: false, css: cssClosedToggle })
-      : this.setState({ navBarOpen: true, css: cssOpenedToggle });
-  };
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState(
+        { isMounted: true },
+        () => {
+          window.addEventListener("scroll", () =>
+            throttle(this.handleScroll())
+          );
+          window.addEventListener("resize", () =>
+            throttle(this.handleResize())
+          );
+        },
+        100
+      );
+    });
+  }
 
-  navItemHandler = () => {
-    let isNavOpen = this.state.navBarOpen;
-    let cssClosedToggle = "collapse navbar-collapse";
-    if (isNavOpen) {
-      this.setState({ navBarOpen: false, css: cssClosedToggle });
+  componentWillUnmount() {
+    window.removeEventListener("scroll", () => this.handleScroll());
+    window.removeEventListener("resize", () => this.handleResize());
+  }
+
+  isHome(url) {
+    return url === "/" ? true : false;
+  }
+  toggleMenu = () => this.setState({ menuOpen: !this.state.menuOpen });
+
+  handleResize = () => {
+    if (window.innerWidth > 1000 && this.state.menuOpen) {
+      this.toggleMenu();
     }
   };
 
-  // }
-  //scrolltoTopHandler
-  scrolltoTopHandler = () => scroll.scrollToTop();
+  handleScroll = () => {
+    const { isMounted, menuOpen, scrollDirection, lastScrollTop } = this.state;
+    const fromTop = window.scrollY;
+
+    // Make sure they scroll more than DELTA
+    if (!isMounted || Math.abs(lastScrollTop - fromTop) <= DELTA || menuOpen) {
+      return;
+    }
+
+    if (fromTop < DELTA) {
+      this.setState({ scrollDirection: "none" });
+    } else if (fromTop > lastScrollTop && fromTop > navHeight) {
+      if (scrollDirection !== "down") {
+        this.setState({ scrollDirection: "down" });
+      }
+    } else if (fromTop + window.innerHeight < document.body.scrollHeight) {
+      if (scrollDirection !== "up") {
+        this.setState({ scrollDirection: "up" });
+      }
+    }
+
+    this.setState({ lastScrollTop: fromTop });
+  };
 
   render() {
+    const { isMounted, menuOpen, scrollDirection } = this.state;
+
     return (
-      <nav
-        className="navbar navbar-expand-sm"
-        style={{ verticalAlign: "middle" }}
-      >
-        {/* logo */}
-        <StyledLogo tabindex="-1">
-          <a href="/" aria-label="home">
-            <Icon name="Logo" onClick={this.scrolltoTopHandler} />
-          </a>
-        </StyledLogo>
-        {/* toggler button */}
-        <button
-          className="navbar-toggler"
-          type="button"
-          onClick={this.navBarHandler}
-          style={{
-            color: "white",
-            borderColor: "transparent",
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundImage: `url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(204, 214, 249)' stroke-width='1' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E")`,
-          }}
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
-        {/* items */}
-        <div className={this.state.css}>
-          <StyledList>
-            {this.state.sections.map((section) => {
-              return (
-                <li key={section.text} className="nav-item">
-                  <div className="link-to">
-                    <StyledIcon className="icon">
-                      <i aria-hidden="true" className="fa">
-                        {section.icon}
-                      </i>
-                    </StyledIcon>
+      <StyledContainer scrollDirection={scrollDirection}>
+        <Helmet>
+          <body className={menuOpen ? "blur" : ""} />
+        </Helmet>
+        <StyledNav>
+          {/* LOGO */}
+          <StyledLogo tabindex="-1">
+            <a href="/" aria-label="home">
+              <Icon name="Logo" onClick={this.scrolltoTopHandler} />
+            </a>
+            {/* covid */}
+          </StyledLogo>
+
+          {/* TOGGLE BUTTON */}
+
+          <StyledHamburguer onClick={this.toggleMenu}>
+            <StyledhaburguerBox>
+              <StyledHamburguerInner menuOpen={menuOpen} />
+            </StyledhaburguerBox>
+          </StyledHamburguer>
+          {/* SIDE-MENU */}
+          <StyledSideBar menuOpen={this.state.menuOpen} aria-hidden={!menuOpen}>
+            <nav>
+              {sections && (
+                <ul>
+                  {sections.map(({ url, name }, index) => (
+                    <li key={index}>
+                      <Link
+                        activeClass="active"
+                        to={url}
+                        spy={true}
+                        smooth={true}
+                        offset={-50}
+                        duration={1500}
+                        onClick={this.toggleMenu}
+                      >
+                        {name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <a
+                href={cv}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="resume-link"
+              >
+                Curriculum
+              </a>
+            </nav>
+          </StyledSideBar>
+
+          {/* LINKS */}
+
+          <StyledLink>
+            <StyledList>
+              {sections.map(({ url, name }, index) => {
+                const isHome = this.isHome(url);
+                return (
+                  <StyledListItem key={index}>
                     <Link
-                      className="nav-link text-link text-capitalize"
                       activeClass="active"
-                      to={section.name}
+                      to={name}
                       spy={true}
                       smooth={true}
                       offset={-50}
                       duration={1500}
-                      onClick={this.navItemHandler}
                     >
-                      {section.text}
+                      {name}
                     </Link>
-                  </div>
-                </li>
-              );
-            })}
-          </StyledList>
-        </div>
-      </nav>
+                  </StyledListItem>
+                );
+              })}
+            </StyledList>
+
+            <div className="resume-wrapper">
+              <a
+                href={cv}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="resume-button"
+              >
+                Curriculum
+              </a>
+            </div>
+          </StyledLink>
+        </StyledNav>
+      </StyledContainer>
     );
   }
 }

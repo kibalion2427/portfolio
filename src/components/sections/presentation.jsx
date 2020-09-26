@@ -9,8 +9,6 @@ const StyledPresentationSection = styled.section`
   flex-direction: column;
   align-items: flex-start;
   min-height: 100vh;
-  margin-top: -100px !important;
-
   h1 {
     margin: 0 0 30px 4px;
     color: var(--green);
@@ -20,6 +18,9 @@ const StyledPresentationSection = styled.section`
 
     @media (max-width: 480px) {
       margin: 0 0 20px 2px;
+    }
+    @media (max-width: 768px) {
+      display: none;
     }
   }
 

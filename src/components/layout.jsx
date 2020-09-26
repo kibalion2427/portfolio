@@ -7,9 +7,6 @@ const StyledContent = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  /* @media (max-width: 768px) {
-    padding: 0 5px;
-  } */
 `;
 
 const Layout = ({ children }) => {

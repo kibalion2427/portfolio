@@ -177,8 +177,6 @@ const Work = ({ data }) => {
           {work &&
             work.map((item, index) => {
               const { company } = item.details;
-              // console.log("company", company);
-              // console.log("company", company, "index", index);
               return (
                 <li key={index}>
                   <StyledTabButton
