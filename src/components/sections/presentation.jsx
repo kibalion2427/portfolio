@@ -55,7 +55,7 @@ const Presentation = () => {
   const four = (
     <p>
       I'm a computer science engineer based in Quito, EC passionated about
-      websites building and architecture.
+      websites (design and architecture).
     </p>
   );
   const five = (

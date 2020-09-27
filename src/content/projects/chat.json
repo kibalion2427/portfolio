@@ -2,11 +2,11 @@
   "attributes": {
     "date": "2",
     "title": "Chat",
-    "cover": "chat.png",
+    "cover": "chat0.png",
     "github": "https://github.com/kibalion2427/jwt-node",
     "external": "http://ec2-3-17-204-4.us-east-2.compute.amazonaws.com",
     "tech": ["React", "Node.js", "Express", "Socket.io", "MongoDB"],
     "showInProjects": true
   },
-  "body": "A web app  to simulate comercial chats between administrators and clients. Use JWT for authorization and authentication. If you want to test use admin/admin for administrator and roger/roger for the client .\n"
+  "body": "A web app  to simulate comercial chats between administrators and clients. Use JWT for authorization and authentication. If you want to test,so, use next credentials (admin/admin) for administrator panel and (roger/roger) for the client panel .\n"
 }

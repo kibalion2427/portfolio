@@ -3,9 +3,6 @@ import FontFaces from "./fonts";
 import TransitionStyles from "./TransitionStyles";
 import PrismStyles from "./PrismStyles";
 
-
-
-
 const GlobalStyle = createGlobalStyle`
   ${FontFaces};
 
@@ -428,6 +425,29 @@ nav{
     opacity: 1;
     transform: translateY(0px);
     transition: opacity 300ms var(--easing), transform 300ms var(--easing);
+  }
+
+  /*fade*/
+  .fadedown-enter {
+    opacity: 0.01;
+    transform: translateY(-20px);
+    transition: opacity 300ms var(--easing), transform 300ms var(--easing);
+  }
+
+  .fadedown-enter-active {
+    opacity: 1;
+    transform: translateY(0px);
+    transition: opacity 300ms var(--easing), transform 300ms var(--easing);
+  }
+
+  .fade-enter {
+    opacity: 0.01;
+    transition: opacity 1000ms var(--easing);
+  }
+
+  .fade-enter-active {
+    opacity: 1;
+    transition: opacity 1000ms var(--easing);
   }
 
 

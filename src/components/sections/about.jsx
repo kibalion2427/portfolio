@@ -148,17 +148,15 @@ const About = ({ data }) => {
           <p>Hello! I'm Roger, a computer engineer based in Ecuador.</p>
 
           <p>
-            I enjoy designing architectures about websites, applications and
-            implementing them using modern frontend and backend frameworks. I
-            always like to work with with UI/UX and SOLID best practices, to
-            provide performant experiences.
+            I enjoy building web, desktop and mobile applications using modern
+            frameworks and clean architectures, to provide performant experiences.
           </p>
 
           <p>
             Before graduating from{" "}
             <a href="https://www.espe.edu.ec">Espe University</a>, I joined the
             engineering team at <a href="https://www.easysoft.com">Easysoft</a>{" "}
-            where I work on a wide variety of interesting and meaningful
+            where I worked on a wide variety of interesting and meaningful
             projects about banking solutions.
           </p>
 

@@ -1,16 +1,15 @@
-var workData = {
+var data = {
   work: [
     {
       details: {
-        company: "Freelacer",
-        title: "FullStack",
+        company: "Coviclean",
+        title: "Software Developer & Content Manager",
         location: "Quito",
-        url: "easysoft.com",
-        range: "June 2020 - Present",
+        url: "https://coviclean.com",
+        range: "March 2020 - Present",
         html: `
-                  + Develop of modules for banking customers of Ecuador using C#, Python and JS
-                  + Engineered and mantained code for in-house and client websites primarly using C# and Silverlight
-                  + Clients included Banco Pichincha, Banco del Pacífico, Banco Produbanco, Banco Solidario and more
+                  + Design and develop of the main web app for the site
+                  + Creation of marketing SEO using Social Networks
                   `,
       },
     },
@@ -42,5 +41,4 @@ var workData = {
     },
   ],
 };
-// };
-export default workData;
+export default data;

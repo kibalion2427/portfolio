@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { srConfig, email } from "@config";
-import { theme, Section, Heading } from "@styles";
 import sr from "@utils/sr";
+import { theme, Section, Heading } from "@styles";
+const { colors } = theme;
 
 const StyledContactSection = styled.section`
   max-width: 600px;
@@ -44,6 +45,13 @@ const StyledContactSection = styled.section`
     ${({ theme }) => theme.mixins.bigButton};
     margin-top: 50px;
   }
+
+  .email {
+    color: ${colors.green};
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 300;
+  }
 `;
 
 const Contact = () => {
@@ -57,8 +65,8 @@ const Contact = () => {
       <h2 className="title">Get In Touch</h2>
 
       <p>
-        Wheter you have any question about my work, I'll try my best to get back
-        to you!
+        Wheter you have any question about my work, contact me to{" "}
+        <span className="email">roger1994@gmail.com</span>
       </p>
 
       <a className="email-link" href={`mailto:${email}`}>

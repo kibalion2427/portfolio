@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import data from "../../content/work/data";
+import { CSSTransition } from "react-transition-group";
 import { srConfig } from "@config";
 import sr from "@utils/sr";
 import styled from "styled-components";
@@ -66,13 +68,14 @@ const StyledTabButton = styled.button`
   background-color: transparent;
   height: ${theme.tabHeight}px;
   padding: 0 20px 2px;
-  transition: ${theme.transition};
+  /* transition: ${theme.transition}; */
+
   border-left: 2px solid ${colors.darkGrey};
   text-align: left;
   white-space: nowrap;
   font-family: ${fonts.SFMono};
   font-size: ${fontSizes.smish};
-  color: ${props => (props.isActive ? colors.green : colors.lightGrey)};
+  color: ${(props) => (props.isActive ? colors.green : colors.lightGrey)};
   ${media.tablet`padding: 0 15px 2px;`};
   ${media.thone`
     ${mixins.flexCenter};
@@ -98,12 +101,16 @@ const StyledHighLight = styled.span`
   position: absolute;
   top: 0;
   left: 0;
-  transform: translateY(
-    ${props =>
-      props.activeTabId > 0 ? props.activeTabId * theme.tabHeight : 0}px
-  );
   transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition-delay: 0.1s;
+  /* transform: translateY(
+    ${(props) =>
+    props.activeTabId > 0 ? props.activeTabId * theme.tabHeight : 0}px
+  ); */
+  transform: translateY(
+    calc(${({ activeTabId }) => activeTabId} * var(--tab-height))
+  );
+
   ${media.thone`
   width:100%;
   max-width: ${theme.tabWidth}px;
@@ -111,11 +118,14 @@ const StyledHighLight = styled.span`
   margin-left:50px;
   top:auto;
   bottom:0;
-  transform: translateX(
-      ${props =>
+  transform: translateX(calc(${({ activeTabId }) =>
+    activeTabId} * var(--tab-width)));
+  /* transform: translateX(
+      ${(props) =>
         props.activeTabId > 0 ? props.activeTabId * theme.tabWidth : 0}px
-    );
+    ); */
   `};
+
   ${media.phablet`
     margin-left: 25px;
   `};
@@ -130,7 +140,8 @@ const StyledTabContent = styled.div`
   ${media.tablet`padding-left: 20px;`};
   ${media.thone`padding-left: 0;`};
   ul {
-    ${mixins.fancyList};
+    /* ${mixins.fancyList}; */
+    ${({ theme }) => theme.mixins.fancyList}
   }
   a {
     ${mixins.inlineLink};
@@ -157,7 +168,7 @@ const StyledJobRange = styled.h5`
   margin-bottom: 30px;
 `;
 const StyledJobDetails = styled.ul``;
-const Work = ({ data }) => {
+const Work = () => {
   const revealContainer = useRef(null);
   useEffect(() => sr.reveal(revealContainer.current, srConfig()), []);
 
@@ -180,9 +191,9 @@ const Work = ({ data }) => {
               return (
                 <li key={index}>
                   <StyledTabButton
-                    id={index}
+                    id={`tab-${index}`}
                     role="tab"
-                    ref={el => (tabs.current[index] = el)}
+                    ref={(el) => (tabs.current[index] = el)}
                     isActive={activeTabId === index}
                     tabIndex={activeTabId === index ? "0" : "-1"}
                     aria-selected={activeTabId === index ? true : false}
@@ -202,42 +213,49 @@ const Work = ({ data }) => {
             const { company, title, range, url, html } = item.details;
             const activities = getActivitiesFromHtml(html, "+");
             return (
-              <StyledTabContent
+              <CSSTransition
                 key={index}
-                isActive={activeTabId === index}
-                id={`panel-${index}`}
-                role="tabpanel"
-                aria-labelledby={`tab-${index}`}
-                tabIndex={activeTabId === index ? "0" : "-1"}
-                hidden={activeTabId !== index}
+                in={activeTabId === index}
+                timeout={250}
+                classNames="fade"
               >
-                <StyledJobTitle>
-                  <span>{title}</span>
-                  <StyledCompany>
-                    <span>&nbsp;@&nbsp;</span>
-                    <a
-                      href={url}
-                      target="_blank"
-                      rel="nofollow noopener noreferrer"
-                    >
-                      {company}
-                    </a>
-                  </StyledCompany>
-                </StyledJobTitle>
-                <StyledJobRange>
-                  <span>{range}</span>
-                </StyledJobRange>
+                <StyledTabContent
+                  key={index}
+                  id={`panel-${index}`}
+                  role="tabpanel"
+                  tabIndex={activeTabId === index ? "0" : "-1"}
+                  aria-labelledby={`tab-${index}`}
+                  aria-hidden={activeTabId !== index}
+                  hidden={activeTabId !== index}
+                >
+                  <StyledJobTitle>
+                    <span>{title}</span>
+                    <StyledCompany>
+                      <span>&nbsp;@&nbsp;</span>
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="nofollow noopener noreferrer"
+                      >
+                        {company}
+                      </a>
+                    </StyledCompany>
+                  </StyledJobTitle>
+                  <StyledJobRange>
+                    <span>{range}</span>
+                  </StyledJobRange>
 
-                <StyledJobDetails>
-                  {activities.map((activity, index) => {
-                    return (
-                      <li key={index}>
-                        <div dangerouslySetInnerHTML={{ __html: activity }} />
-                      </li>
-                    );
-                  })}
-                </StyledJobDetails>
-              </StyledTabContent>
+                  <StyledJobDetails>
+                    {activities.map((activity, index) => {
+                      return (
+                        <li key={index}>
+                          <div dangerouslySetInnerHTML={{ __html: activity }} />
+                        </li>
+                      );
+                    })}
+                  </StyledJobDetails>
+                </StyledTabContent>
+              </CSSTransition>
             );
           })}
       </StyledTabContainer>
@@ -246,7 +264,7 @@ const Work = ({ data }) => {
 };
 
 Work.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
 };
 
 export default Work;
