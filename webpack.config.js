@@ -7,6 +7,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: "./public/index.html", // archivo de nuestra vista
   inject: "body", // donde insertaremos nuestro script
+  favicon: "./public/logo-r.ico",
 });
 const config = {
   entry: ["babel-polyfill", "./src/index.js"], // archivo js que codearemos
